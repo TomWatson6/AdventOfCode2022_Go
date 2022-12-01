@@ -6,24 +6,46 @@ import (
 	"github.com/tomwatson6/AdventOfCode2022_Go/internal/day1"
 )
 
-func TestRun(t *testing.T) {
-	ans, err := day1.Run("simple_input.txt")
+func TestPart1(t *testing.T) {
+	ans, err := day1.Part1("simple_input.txt")
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	expected := 0
+	expected := 24000
 
 	if ans != expected {
 		t.Fatalf("incorrect answer, expected: %d, got: %d", expected, ans)
 	}
 }
 
-func BenchmarkRun(b *testing.B) {
+func TestPart2(t *testing.T) {
+	ans, err := day1.Part2("simple_input.txt")
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	expected := 45000
+
+	if ans != expected {
+		t.Fatalf("incorrect answer, expected %d, got %d", expected, ans)
+	}
+}
+
+func BenchmarkPart1(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		_, err := day1.Run("simple_input.txt")
+		_, err := day1.Part1("simple_input.txt")
 		if err != nil {
-			b.Fatal("benchmarking invalid on non-working solution for day1")
+			b.Fatal("benchmarking invalid on non-working solution for day 1, part 1")
+		}
+	}
+}
+
+func BenchmarkPart2(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		_, err := day1.Part2("simple_input.txt")
+		if err != nil {
+			b.Fatal("benchmarking invalid on non-working solution for day 1, part 2")
 		}
 	}
 }
