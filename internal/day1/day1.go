@@ -5,7 +5,7 @@ import (
 )
 
 func Run(fileName string) (int, error) {
-	i, err := input.ReadFile(fileName)
+	_, err := input.ReadFile(fileName)
 	if err != nil {
 		return 0, err
 	}
