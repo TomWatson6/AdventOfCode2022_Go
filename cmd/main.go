@@ -6,12 +6,14 @@ import (
 	"github.com/tomwatson6/AdventOfCode2022_Go/internal/day1"
 	"github.com/tomwatson6/AdventOfCode2022_Go/internal/day2"
 	"github.com/tomwatson6/AdventOfCode2022_Go/internal/day3"
+	"github.com/tomwatson6/AdventOfCode2022_Go/internal/day4"
 )
 
 func main() {
 	d1("internal/day1/input.txt")
 	d2("internal/day2/input.txt")
 	d3("internal/day3/input.txt")
+	d4("internal/day4/input.txt")
 }
 
 func d1(fileName string) {
@@ -68,4 +70,24 @@ func d3(fileName string) {
 	}
 
 	fmt.Printf("Part 2: %d\n", d3p2)
+	fmt.Println()
+}
+
+func d4(fileName string) {
+	fmt.Println("--- Day 4 ---")
+
+	d4p1, err := day4.Part1(fileName)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("Part 1: %d\n", d4p1)
+
+	d4p2, err := day4.Part2(fileName)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("Part 2: %d\n", d4p2)
+	fmt.Println()
 }
