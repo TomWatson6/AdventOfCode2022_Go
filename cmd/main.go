@@ -10,10 +10,11 @@ import (
 	"github.com/tomwatson6/AdventOfCode2022_Go/internal/day2"
 	"github.com/tomwatson6/AdventOfCode2022_Go/internal/day3"
 	"github.com/tomwatson6/AdventOfCode2022_Go/internal/day4"
+	"github.com/tomwatson6/AdventOfCode2022_Go/internal/day5"
 )
 
 var days = []func(string) string{
-	d1, d2, d3, d4,
+	d1, d2, d3, d4, d5,
 }
 
 func main() {
@@ -26,9 +27,12 @@ func main() {
 	for i, d := range days {
 		go func(index int, path string, day func(string) string, mu *sync.Mutex, wg *sync.WaitGroup) {
 			p := strings.Replace(path, "X", strconv.Itoa(index+1), 1)
+			solution := day(p)
+
 			mu.Lock()
-			output[index] = day(p)
+			output[index] = solution
 			mu.Unlock()
+
 			wg.Done()
 		}(i, path, d, mu, wg)
 	}
@@ -116,6 +120,26 @@ func d4(fileName string) string {
 	}
 
 	output += fmt.Sprintf("Part 2: %d\n\n", d4p2)
+
+	return output
+}
+
+func d5(fileName string) string {
+	output := "--- Day 5 ---\n"
+
+	d5p1, err := day5.Part1(fileName)
+	if err != nil {
+		panic(err)
+	}
+
+	output += fmt.Sprintf("Part 1: %s\n", d5p1)
+
+	d5p2, err := day5.Part2(fileName)
+	if err != nil {
+		panic(err)
+	}
+
+	output += fmt.Sprintf("Part 2: %s\n\n", d5p2)
 
 	return output
 }
