@@ -1,7 +1,6 @@
 package day5
 
 import (
-	"fmt"
 	"strings"
 
 	"github.com/tomwatson6/AdventOfCode2022_Go/pkg/input"
@@ -26,8 +25,6 @@ func Part1(fileName string) (string, error) {
 	}
 
 	output := ""
-
-	fmt.Printf("%#v", stacks)
 
 	for _, s := range stacks {
 		output += string(s[len(s)-1])
@@ -54,8 +51,6 @@ func Part2(fileName string) (string, error) {
 	}
 
 	output := ""
-
-	fmt.Printf("%#v", stacks)
 
 	for _, s := range stacks {
 		output += string(s[len(s)-1])
