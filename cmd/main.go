@@ -5,6 +5,7 @@ import (
 	"strconv"
 	"strings"
 	"sync"
+	"time"
 
 	"github.com/tomwatson6/AdventOfCode2022_Go/internal/day1"
 	"github.com/tomwatson6/AdventOfCode2022_Go/internal/day2"
@@ -12,10 +13,11 @@ import (
 	"github.com/tomwatson6/AdventOfCode2022_Go/internal/day4"
 	"github.com/tomwatson6/AdventOfCode2022_Go/internal/day5"
 	"github.com/tomwatson6/AdventOfCode2022_Go/internal/day6"
+	"github.com/tomwatson6/AdventOfCode2022_Go/internal/day7"
 )
 
 var days = []func(string) string{
-	d1, d2, d3, d4, d5, d6,
+	d1, d2, d3, d4, d5, d6, d7,
 }
 
 func main() {
@@ -24,11 +26,19 @@ func main() {
 	wg := &sync.WaitGroup{}
 	wg.Add(len(days))
 
+	start := time.Now()
+
 	path := "internal/dayX/input.txt"
 	for i, d := range days {
 		go func(index int, path string, day func(string) string, mu *sync.Mutex, wg *sync.WaitGroup) {
 			p := strings.Replace(path, "X", strconv.Itoa(index+1), 1)
+			solStart := time.Now()
+
 			solution := day(p)
+
+			solElapsed := time.Since(solStart)
+
+			solution += fmt.Sprintf("Time Taken: %d ms\n\n", solElapsed.Milliseconds())
 
 			mu.Lock()
 			output[index] = solution
@@ -43,6 +53,12 @@ func main() {
 	for _, out := range output {
 		fmt.Print(out)
 	}
+
+	elapsed := time.Since(start)
+
+	fmt.Printf("Total Time Taken: %d ms", elapsed.Milliseconds())
+	// output := d7("internal/day7/input.txt")
+	// fmt.Println(output)
 }
 
 func d1(fileName string) string {
@@ -60,7 +76,7 @@ func d1(fileName string) string {
 		panic(err)
 	}
 
-	output += fmt.Sprintf("Part 2: %d\n\n", d1p2)
+	output += fmt.Sprintf("Part 2: %d\n", d1p2)
 
 	return output
 }
@@ -80,7 +96,7 @@ func d2(fileName string) string {
 		panic(err)
 	}
 
-	output += fmt.Sprintf("Part 2: %d\n\n", d2p2)
+	output += fmt.Sprintf("Part 2: %d\n", d2p2)
 
 	return output
 }
@@ -100,7 +116,7 @@ func d3(fileName string) string {
 		panic(err)
 	}
 
-	output += fmt.Sprintf("Part 2: %d\n\n", d3p2)
+	output += fmt.Sprintf("Part 2: %d\n", d3p2)
 
 	return output
 }
@@ -120,7 +136,7 @@ func d4(fileName string) string {
 		panic(err)
 	}
 
-	output += fmt.Sprintf("Part 2: %d\n\n", d4p2)
+	output += fmt.Sprintf("Part 2: %d\n", d4p2)
 
 	return output
 }
@@ -140,7 +156,7 @@ func d5(fileName string) string {
 		panic(err)
 	}
 
-	output += fmt.Sprintf("Part 2: %s\n\n", d5p2)
+	output += fmt.Sprintf("Part 2: %s\n", d5p2)
 
 	return output
 }
@@ -160,7 +176,27 @@ func d6(fileName string) string {
 		panic(err)
 	}
 
-	output += fmt.Sprintf("Part 2: %d\n\n", d6p2)
+	output += fmt.Sprintf("Part 2: %d\n", d6p2)
+
+	return output
+}
+
+func d7(fileName string) string {
+	output := "--- Day 7 ---\n"
+
+	d7p1, err := day7.Part1(fileName)
+	if err != nil {
+		panic(err)
+	}
+
+	output += fmt.Sprintf("Part 1: %d\n", d7p1)
+
+	d7p2, err := day7.Part2(fileName)
+	if err != nil {
+		panic(err)
+	}
+
+	output += fmt.Sprintf("Part 2: %d\n", d7p2)
 
 	return output
 }
