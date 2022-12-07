@@ -1,7 +1,6 @@
 package day7
 
 import (
-	"fmt"
 	"sort"
 	"strconv"
 	"strings"
@@ -28,20 +27,6 @@ func NewDirectory(name string, parent *directory) *directory {
 		files:       []*file{},
 		directories: []*directory{},
 	}
-}
-
-func (d *directory) navigate(name string) (*directory, error) {
-	if d.name == name {
-		return d, nil
-	}
-
-	for _, dir := range d.directories {
-		if dir.name == name {
-			return dir, nil
-		}
-	}
-
-	return nil, fmt.Errorf("%s not found in directory", name)
 }
 
 func (d directory) calculateDirSizes(sizes *[]int) int {
