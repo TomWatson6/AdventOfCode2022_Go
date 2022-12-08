@@ -8,7 +8,7 @@ import (
 	"github.com/tomwatson6/AdventOfCode2022_Go/pkg/util"
 )
 
-func TestD7P1(t *testing.T) {
+func TestD8P1(t *testing.T) {
 	ans, err := day8.Part1("simple_input.txt")
 	if err != nil {
 		t.Fatal(err)
@@ -21,7 +21,7 @@ func TestD7P1(t *testing.T) {
 	}
 }
 
-func TestD7P2(t *testing.T) {
+func TestD8P2(t *testing.T) {
 	ans, err := day8.Part2("simple_input.txt")
 	if err != nil {
 		t.Fatal(err)
@@ -108,7 +108,7 @@ func TestGetScenicScore(t *testing.T) {
 	}
 }
 
-func BenchmarkD7P1(b *testing.B) {
+func BenchmarkD8P1(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		_, err := day8.Part1("simple_input.txt")
 		if err != nil {
@@ -117,7 +117,7 @@ func BenchmarkD7P1(b *testing.B) {
 	}
 }
 
-func BenchmarkD7P2(b *testing.B) {
+func BenchmarkD8P2(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		_, err := day8.Part2("simple_input.txt")
 		if err != nil {
