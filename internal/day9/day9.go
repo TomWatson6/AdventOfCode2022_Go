@@ -63,20 +63,20 @@ func Part2(fileName string) (int, error) {
 
 	visited := map[util.Coord]bool{}
 
-	var snake []util.Coord
+	var rope []util.Coord
 
 	for i := 0; i < 10; i++ {
-		snake = append(snake, util.Coord{X: 0, Y: 0})
+		rope = append(rope, util.Coord{X: 0, Y: 0})
 	}
 
 	for _, move := range moves {
 		for i := 0; i < move.Mag; i++ {
-			snake[0] = util.Coord{X: snake[0].X + Directions[move.Dir].X, Y: snake[0].Y + Directions[move.Dir].Y}
-			for j := 0; j < len(snake)-1; j++ {
-				snake[j+1] = Trail(snake[j], snake[j+1])
+			rope[0] = util.Coord{X: rope[0].X + Directions[move.Dir].X, Y: rope[0].Y + Directions[move.Dir].Y}
+			for j := 0; j < len(rope)-1; j++ {
+				rope[j+1] = Trail(rope[j], rope[j+1])
 			}
 
-			visited[snake[len(snake)-1]] = true
+			visited[rope[len(rope)-1]] = true
 		}
 	}
 
@@ -88,6 +88,15 @@ func Trail(head, tail util.Coord) util.Coord {
 	dy := math.Abs(float64(head.Y) - float64(tail.Y))
 
 	if dx == 2 && dy == 2 {
+		/*
+			H = Head, T = Tail, X = Destination
+
+			T...T
+			.X.X.
+			..H..
+			.X.X.
+			T...T
+		*/
 		switch {
 		case head.X > tail.X && head.Y > tail.Y:
 			tail = util.Coord{X: head.X - 1, Y: head.Y - 1}
@@ -102,6 +111,15 @@ func Trail(head, tail util.Coord) util.Coord {
 		return tail
 	}
 
+	/*
+		H = Head, T = Tail, X = Destination
+
+		.TTT.
+		T.X.T
+		TXHXT
+		T.X.T
+		.TTT.
+	*/
 	switch {
 	case head.X-tail.X > 1:
 		tail = util.Coord{X: head.X - 1, Y: head.Y}
