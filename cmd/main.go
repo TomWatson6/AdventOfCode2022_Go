@@ -10,6 +10,7 @@ import (
 	"github.com/tomwatson6/AdventOfCode2022_Go/internal/day1"
 	"github.com/tomwatson6/AdventOfCode2022_Go/internal/day10"
 	"github.com/tomwatson6/AdventOfCode2022_Go/internal/day11"
+	"github.com/tomwatson6/AdventOfCode2022_Go/internal/day12"
 	"github.com/tomwatson6/AdventOfCode2022_Go/internal/day2"
 	"github.com/tomwatson6/AdventOfCode2022_Go/internal/day3"
 	"github.com/tomwatson6/AdventOfCode2022_Go/internal/day4"
@@ -22,7 +23,7 @@ import (
 
 var days = []func(string) string{
 	d1, d2, d3, d4, d5, d6, d7, d8, d9, d10,
-	d11,
+	d11, d12,
 }
 
 func main() {
@@ -280,6 +281,26 @@ func d11(fileName string) string {
 	}
 
 	output += fmt.Sprintf("Part 2: %d\n", d11p2)
+
+	return output
+}
+
+func d12(fileName string) string {
+	output := "--- Day 12 ---\n"
+
+	d12p1, err := day12.Part1(fileName)
+	if err != nil {
+		panic(err)
+	}
+
+	output += fmt.Sprintf("Part 1: %d\n", d12p1)
+
+	d12p2, err := day12.Part2(fileName)
+	if err != nil {
+		panic(err)
+	}
+
+	output += fmt.Sprintf("Part 2: %d\n", d12p2)
 
 	return output
 }
